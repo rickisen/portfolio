@@ -16,7 +16,7 @@ const butter = Butter(env.REACT_APP_BUTTER_TOKEN);
 const target = document.querySelector('#root');
 
 butter.page
-  .list('projects', {})
+  .list('project', {})
   .then(function(resp) {
     console.log(resp.data);
   })
