@@ -69,5 +69,7 @@ Session.vim
 # auto-generated tag files
 tags
 
-
 # End of https://www.gitignore.io/api/vim,linux,macos
+
+# ignore pure css files, since we compile from sass
+src/**/*.css
