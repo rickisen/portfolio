@@ -1,0 +1,74 @@
+{
+  "siteSettings": {
+    "name": "Rickard - Freelance developer",
+    "url": "https://rickisen.com",
+    "heroSection": {
+      "image": "/public/hero.jpg",
+      "title": "Rickard Petersen",
+      "subTitle": "Freelance Developer\nHacker Extraordinair",
+      "paragraph":
+        "Freelance webdeveloper based in Stockholm Sweden, open for remote oppurtunities"
+    }
+  },
+  "sections": {
+    "projects": {
+      "title": "Projects I have worked on:",
+      "endClientTitle": "client:",
+      "roleTitle": "my role:",
+      "loadText": "Load more"
+    },
+    "contactForm": {
+      "title": "Contact me!",
+      "namePlaceholder": "Name",
+      "emailPlaceholder": "Email",
+      "subjectPlaceholder": "Subject",
+      "bodyPlaceholder": "Message"
+    }
+  },
+  "projects": [
+    {
+      "agency": "BBH",
+      "endClient": "Maitres",
+      "role": ["Front end", "Back end"],
+      "media": ["https://path.to/video.mp4", "https://path.to/image.png"],
+      "description":
+        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod  tempor invidunt usto duo dolores et ea rebum. Stet clita kasd gubergren,  no sea",
+      "technologies": [
+        {
+          "name": "go-lang",
+          "icon": "/public/icons/goLang.svg"
+        },
+        {
+          "name": "react",
+          "icon": "/public/icons/react.svg"
+        },
+        {
+          "name": "heroku",
+          "icon": "/public/icons/heroku.svg"
+        }
+      ]
+    },
+    {
+      "agency": "BBH",
+      "endClient": "TUI",
+      "role": ["Game dev"],
+      "media": ["https://path.to/video.mp4", "https://path.to/image.png"],
+      "description":
+        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod  tempor invidunt usto duo dolores et ea rebum. Stet clita kasd gubergren,  no sea",
+      "technologies": [
+        {
+          "name": "C#",
+          "icon": "/public/icons/cSharp.svg"
+        },
+        {
+          "name": "Unity 3D",
+          "icon": "/public/icons/unity.svg"
+        },
+        {
+          "name": "Android",
+          "icon": "/public/icons/android.svg"
+        }
+      ]
+    }
+  ]
+}
