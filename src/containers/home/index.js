@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { loadFormSettings } from '../../modules/contactForm';
 import { loadProjects, loadProjectSection } from '../../modules/projects';
 import { loadSiteSettings } from '../../modules/siteSettings';
+import Project from './Project';
 
 class Home extends React.Component {
   componentWillMount() {
@@ -31,12 +32,7 @@ class Home extends React.Component {
     }
 
     const { hero } = siteSettings.siteSettings;
-    const {
-      endClientTitle,
-      roleTitle,
-      title,
-      technologiesTitle
-    } = projects.projectSection;
+    const { title } = projects.projectSection;
     return (
       <div>
         <header className="hero">
@@ -48,35 +44,8 @@ class Home extends React.Component {
         <section className="projects-section">
           <h2>{title}</h2>
           <div>
-            {projects.projects.map((p, i) => (
-              <article key={p.endClient}>
-                <header>
-                  <span>{p.agency}</span>:<span>{p.endClient}</span>
-                </header>
-                <section className="slider">
-                  {p.media.map((m, i) => <img src={m} key={i} alt="" />)}
-                </section>
-                <section className="description">
-                  <h3>{p.title}</h3>
-                  <header>
-                    <span>
-                      {endClientTitle}:<b>{p.endClient}</b>
-                    </span>
-                    <span className="float-right">
-                      {roleTitle}:<b>
-                        {p.role.reduce((acc, next) => acc + ', ' + next)}
-                      </b>
-                    </span>
-                  </header>
-                  <p>{p.description}</p>
-                  <div>
-                    <h4>{technologiesTitle}:</h4>
-                    <ul>
-                      {p.technologies.map((t, i) => <li key={i}>{t.name}</li>)}
-                    </ul>
-                  </div>
-                </section>
-              </article>
+            {projects.projects.map(p => (
+              <Project project={p} projectSection={projects.projectSection} />
             ))}
           </div>
         </section>
