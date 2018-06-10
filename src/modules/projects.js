@@ -1,8 +1,8 @@
 import * as api from '../helpers/fixtureApi';
 
-export const PROJECT_SECTION_LOADING = 'projects/loading';
-export const PROJECT_SECTION_SUCCESS = 'projects/success';
-export const PROJECT_SECTION_FAILURE = 'projects/failure';
+export const PROJECT_SECTION_LOADING = 'projects/section/loading';
+export const PROJECT_SECTION_SUCCESS = 'projects/section/success';
+export const PROJECT_SECTION_FAILURE = 'projects/section/failure';
 
 export const PROJECTS_LOADING = 'projects/loading';
 export const PROJECTS_SUCCESS = 'projects/success';
@@ -10,11 +10,12 @@ export const PROJECTS_FAILURE = 'projects/failure';
 
 const initialState = {
   loadingProjects: false,
-  loadingSettings: false,
+  loadingSection: false,
   error: false,
   projectSection: {
     title: '',
     endClientTitle: '',
+    technologiesTitle: '',
     roleTitle: '',
     loadText: ''
   },
@@ -26,20 +27,20 @@ export default (state = initialState, action) => {
     case PROJECT_SECTION_LOADING:
       return {
         ...state,
-        loadingSettings: true
+        loadingSection: true
       };
     case PROJECT_SECTION_FAILURE:
       return {
         ...initialState,
-        loading: false,
+        loadingSection: false,
         error: true
       };
     case PROJECT_SECTION_SUCCESS:
       return {
         ...state,
-        loading: false,
+        loadingSection: false,
         error: false,
-        projectsSection: action.payload
+        projectSection: action.payload
       };
     case PROJECTS_LOADING:
       return {
@@ -49,13 +50,13 @@ export default (state = initialState, action) => {
     case PROJECTS_FAILURE:
       return {
         ...initialState,
-        loading: false,
+        loadingProjects: false,
         error: true
       };
     case PROJECTS_SUCCESS:
       return {
         ...state,
-        loading: false,
+        loadingProjects: false,
         error: false,
         projects: action.payload
       };

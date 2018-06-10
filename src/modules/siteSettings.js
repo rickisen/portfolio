@@ -10,7 +10,7 @@ const initialState = {
   siteSettings: {
     name: '',
     url: '',
-    heroSection: {
+    hero: {
       image: '',
       title: '',
       subTitle: '',

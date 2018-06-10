@@ -1,59 +1,103 @@
 import React from 'react';
-import { push } from 'react-router-redux';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import {
-  increment,
-  incrementAsync,
-  decrement,
-  decrementAsync
-} from '../../modules/counter';
 
-const Home = props => (
-  <div>
-    <h1>Home</h1>
-    <p>Count: {props.count}</p>
+import { loadFormSettings } from '../../modules/contactForm';
+import { loadProjects, loadProjectSection } from '../../modules/projects';
+import { loadSiteSettings } from '../../modules/siteSettings';
 
-    <p>
-      <button onClick={props.increment} disabled={props.isIncrementing}>
-        Increment
-      </button>
-      <button onClick={props.incrementAsync} disabled={props.isIncrementing}>
-        Increment Async
-      </button>
-    </p>
+class Home extends React.Component {
+  componentWillMount() {
+    this.props.loadSiteSettings();
+    this.props.loadFormSettings();
+    this.props.loadProjectSection();
+    this.props.loadProjects();
+  }
 
-    <p>
-      <button onClick={props.decrement} disabled={props.isDecrementing}>
-        Decrement
-      </button>
-      <button onClick={props.decrementAsync} disabled={props.isDecrementing}>
-        Decrement Async
-      </button>
-    </p>
+  render() {
+    const { siteSettings, projects, contactForm } = this.props;
 
-    <p>
-      <button onClick={() => props.changePage()}>
-        Go to about page via redux
-      </button>
-    </p>
-  </div>
-);
+    const anyLoading =
+      siteSettings.loading ||
+      projects.loadingProjects ||
+      projects.loadingSection ||
+      contactForm.loading;
+    if (anyLoading) {
+      return (
+        <div className="loading">
+          <p>loading...</p>
+        </div>
+      );
+    }
 
-const mapStateToProps = state => ({
-  count: state.counter.count,
-  isIncrementing: state.counter.isIncrementing,
-  isDecrementing: state.counter.isDecrementing
+    const { hero } = siteSettings.siteSettings;
+    const {
+      endClientTitle,
+      roleTitle,
+      title,
+      technologiesTitle
+    } = projects.projectSection;
+    return (
+      <div>
+        <header className="hero">
+          <img src={hero.image} alt="portrait of me" />
+          <h1>{hero.title}</h1>
+          <h2>{hero.subTitle}</h2>
+          <p>{hero.title}</p>
+        </header>
+        <section className="projects-section">
+          <h2>{title}</h2>
+          <div>
+            {projects.projects.map((p, i) => (
+              <article key={p.endClient}>
+                <header>
+                  <span>{p.agency}</span>:<span>{p.endClient}</span>
+                </header>
+                <section className="slider">
+                  {p.media.map((m, i) => <img src={m} key={i} alt="" />)}
+                </section>
+                <section className="description">
+                  <h3>{p.title}</h3>
+                  <header>
+                    <span>
+                      {endClientTitle}:<b>{p.endClient}</b>
+                    </span>
+                    <span className="float-right">
+                      {roleTitle}:<b>
+                        {p.role.reduce((acc, next) => acc + ', ' + next)}
+                      </b>
+                    </span>
+                  </header>
+                  <p>{p.description}</p>
+                  <div>
+                    <h4>{technologiesTitle}:</h4>
+                    <ul>
+                      {p.technologies.map((t, i) => <li key={i}>{t.name}</li>)}
+                    </ul>
+                  </div>
+                </section>
+              </article>
+            ))}
+          </div>
+        </section>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = ({ projects, siteSettings, contactForm }) => ({
+  projects,
+  contactForm,
+  siteSettings
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      increment,
-      incrementAsync,
-      decrement,
-      decrementAsync,
-      changePage: () => push('/about-us')
+      loadFormSettings,
+      loadProjectSection,
+      loadProjects,
+      loadSiteSettings
     },
     dispatch
   );

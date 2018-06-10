@@ -41,7 +41,7 @@ export default (state = initialState, action) => {
   }
 };
 
-export const loadformSettings = () => {
+export const loadFormSettings = () => {
   return dispatch => {
     dispatch({
       type: FORM_SETTINGS_LOADING
