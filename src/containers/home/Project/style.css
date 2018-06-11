@@ -26,7 +26,7 @@
 
 .description .slider {
   opacity: 1;
-  background: lightgrey;
+  background: transparent;
   height: 50rem;
   width: 75rem;
   position: absolute;
@@ -36,7 +36,7 @@
   transition: opacity 0.4s linear;
 }
 .description .slider .background-image {
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   position: absolute;
   width: 75rem;

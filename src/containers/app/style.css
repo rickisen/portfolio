@@ -1,0 +1,25 @@
+.navigation {
+  position: relative;
+  margin: 0 auto 1rem auto;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 75rem;
+}
+.navigation > * {
+  margin-left: 0.2rem;
+}
+.navigation > *:after {
+  color: white !important; /*so the link styling doesnt change it*/
+  margin-left: 0.2rem;
+  content: '/';
+}
+.navigation > *:hover:after {
+}
+.navigation > *:last-child:after {
+  content: '';
+}
+
+.main {
+  position: relative;
+}
