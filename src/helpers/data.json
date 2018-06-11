@@ -31,7 +31,11 @@
       "agency": "BBH",
       "endClient": "Maitres",
       "role": ["Front end", "Back end"],
-      "media": ["https://path.to/video.mp4", "https://path.to/image.png"],
+      "media": [
+        "https://static1.squarespace.com/static/5aba391d5b409b0d42f05e19/t/5ad46f951ae6cfce64d0691c/1523871640920/maitres_thumb2000x1333.jpg?format=1500w",
+        "https://static1.squarespace.com/static/5aba391d5b409b0d42f05e19/t/5ad47afa70a6ad118aa85c07/1523874573775/maitres_intro2500w.jpg?format=2500w",
+        "https://is4-ssl.mzstatic.com/image/thumb/Purple127/v4/9a/24/71/9a2471cf-aabc-d842-1c37-46dbffb19ea3/pr_source.jpg/300x0w.jpg"
+      ],
       "title": "A Restaurant app for VIP customers",
       "description":
         "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod  tempor invidunt usto duo dolores et ea rebum. Stet clita kasd gubergren,  no sea",
@@ -54,7 +58,11 @@
       "agency": "BBH",
       "endClient": "TUI",
       "role": ["Game dev"],
-      "media": ["https://path.to/video.mp4", "https://path.to/image.png"],
+      "media": [
+        "https://lh3.googleusercontent.com/TmSU1_njdQujim58v8zOetLBZks47Ziocz0AdEN-TfKerRZmCaVSKQVc9rtiPMqFc_o=w1916-h895-rw",
+        "https://lh3.googleusercontent.com/VkQ19bweWjjXAS9aYLmEMqZX5VfRfOLrukcKoab0jGIN5UsjeJWckurn2Z_PiIoY7t8=w1916-h895-rw",
+        "https://lh3.googleusercontent.com/riAijcyLN6tnQ5bLp3fu9PBwOWrj9JR4oskdu3dB1XGeoNwHbeOilLRO9B-TLz98juM=w1916-h895-rw"
+      ],
       "title": "A smartphone game for 3-5 year olds",
       "description":
         "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod  tempor invidunt usto duo dolores et ea rebum. Stet clita kasd gubergren,  no sea",

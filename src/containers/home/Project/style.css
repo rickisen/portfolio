@@ -1,0 +1,63 @@
+.description {
+  flex: 1 1 content;
+  position: relative;
+  margin-bottom: 5rem;
+  height: 50rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.description > *:not(.slider) {
+  position: relative;
+  opacity: 0;
+  transition: opacity 0.4s linear;
+}
+.description:hover > *,
+.description.active > * {
+  opacity: 1;
+}
+.description p {
+  width: 75rem;
+}
+.description .paragraph {
+  max-width: 40rem;
+}
+
+.description .slider {
+  opacity: 1;
+  background: lightgrey;
+  height: 50rem;
+  width: 75rem;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+  transition: opacity 0.4s linear;
+}
+.description .slider .background-image {
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  width: 75rem;
+  height: 50rem;
+  top: 0;
+  left: 0;
+  transition: all 0.8s ease-in-out;
+}
+.description .slider .background-image.current {
+  transform: translateX(0);
+  opacity: 1;
+}
+.description .slider .background-image.next {
+  transform: translateX(-75rem);
+  opacity: 0;
+}
+.description .slider .background-image.prev {
+  transform: translateX(75rem);
+  opacity: 0;
+}
+.description:hover .slider,
+.description.active > .slider {
+  opacity: 0.4;
+}

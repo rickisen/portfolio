@@ -1,0 +1,41 @@
+main {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.view {
+  flex: 1 1 content;
+  max-width: 75rem;
+  overflow: hidden;
+}
+
+.view > .hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.view > .hero * {
+  text-align: center;
+}
+.view > .hero > * {
+  max-width: 25rem;
+}
+.view > .hero h2 {
+  max-width: 20rem;
+}
+.view > .hero img {
+  height: 15rem;
+  min-width: 10rem;
+  background: lightgrey;
+}
+
+.projects-section {
+  margin-top: 5rem;
+}
+.projects-section h2 {
+  text-align: center;
+}
