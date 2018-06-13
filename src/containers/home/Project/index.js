@@ -1,10 +1,16 @@
 import React from 'react';
 
+import {
+  offsetBetween,
+  offsetToDocument
+} from '../../../helpers/paralaxHelpers';
 import style from './style.css';
 
 export default class Project extends React.Component {
   constructor(props, context) {
     super(props, context);
+
+    this.prevScrollDistance = 0;
 
     this.state = {
       intervalId: null,
@@ -18,6 +24,18 @@ export default class Project extends React.Component {
 
   componentWillUnmount() {
     this.stopSlider();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const projectElem = this.refs['project-ref'];
+    let scrollDistance = 1000 * this.props.iteration; // just to guard in case of serverside rendering
+    if (projectElem) {
+      scrollDistance = Math.round(offsetToDocument(projectElem).top);
+    }
+    this.props.addColor(this.props.iteration, {
+      scrollDistance,
+      color: this.props.project.primaryColor
+    });
   }
 
   startSlider() {
@@ -46,6 +64,7 @@ export default class Project extends React.Component {
 
     return (
       <article
+        ref="project-ref"
         key={p.endClient}
         className="project"
         onClick={() => this.incrementSlide()}

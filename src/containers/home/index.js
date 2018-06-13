@@ -2,6 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import { addColor } from '../../modules/colors';
 import { loadFormSettings } from '../../modules/contactForm';
 import { loadProjects, loadProjectSection } from '../../modules/projects';
 import { loadSiteSettings } from '../../modules/siteSettings';
@@ -15,6 +16,8 @@ class Home extends React.Component {
     this.props.loadProjectSection();
     this.props.loadProjects();
   }
+
+  componentWillReceiveProps(nextProps) {}
 
   render() {
     const { siteSettings, projects, contactForm } = this.props;
@@ -50,6 +53,7 @@ class Home extends React.Component {
                 project={p}
                 iteration={i}
                 projectSection={projects.projectSection}
+                addColor={(k, v) => this.props.addColor(k, v)}
               />
             ))}
           </div>
@@ -71,7 +75,8 @@ const mapDispatchToProps = dispatch =>
       loadFormSettings,
       loadProjectSection,
       loadProjects,
-      loadSiteSettings
+      loadSiteSettings,
+      addColor
     },
     dispatch
   );
