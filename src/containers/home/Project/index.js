@@ -91,21 +91,24 @@ export default class Project extends React.Component {
               </div>
             ))}
           </section>
-          <h3>{p.title}</h3>
-          <header>
-            <p>
-              {endClientTitle}:<b>{p.endClient}</b>
-            </p>
-            <p>
-              {roleTitle}:<b>
-                {p.role.reduce((acc, next) => acc + ', ' + next)}
-              </b>
-            </p>
-          </header>
-          <p className="paragraph">{p.description}</p>
-          <div>
-            <h4>{technologiesTitle}:</h4>
-            <ul>{p.technologies.map((t, i) => <li key={i}>{t.name}</li>)}</ul>
+          <div className="content">
+            <h3>{p.title}</h3>
+            <header>
+              <p>
+                {endClientTitle}:<b>{p.endClient}</b>
+              </p>
+              <p>
+                {roleTitle}:<b>
+                  {' '}
+                  {p.role.reduce((acc, next) => acc + ', ' + next)}{' '}
+                </b>
+              </p>
+            </header>
+            <p className="paragraph">{p.description}</p>
+            <div>
+              <h4>{technologiesTitle}:</h4>
+              <ul>{p.technologies.map((t, i) => <li key={i}>{t.name}</li>)}</ul>
+            </div>
           </div>
         </section>
       </article>

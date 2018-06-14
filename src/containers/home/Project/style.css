@@ -3,25 +3,23 @@
   position: relative;
   margin-bottom: 5rem;
   height: 50rem;
-  padding: 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
+  perspective: 60rem;
+  width: 75rem;
 }
-.description > *:not(.slider) {
+.description > .content {
+  background: rgba(20, 20, 20, 0.7);
   position: relative;
   opacity: 0;
+  width: 40rem;
   transition: opacity 0.4s linear;
+  padding: 1rem 2rem;
 }
 .description:hover > *,
 .description.active > * {
   opacity: 1;
-}
-.description p {
-  width: 75rem;
-}
-.description .paragraph {
-  max-width: 40rem;
 }
 
 .description .slider {
@@ -33,7 +31,9 @@
   top: 0px;
   left: 0px;
   overflow: hidden;
-  transition: opacity 0.4s linear;
+  transition-property: opacity transform;
+  transition-duration: 0.4s;
+  transition-timing-function: ease-in-out;
 }
 .description .slider .background-image {
   background-size: contain;
@@ -59,5 +59,7 @@
 }
 .description:hover .slider,
 .description.active > .slider {
-  opacity: 0.4;
+  opacity: 0.8;
+  transform: translateX(0rem) rotate3d(0, 1, 0, -30deg);
+  transform-origin: right;
 }
