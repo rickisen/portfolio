@@ -59,7 +59,7 @@ class AnimatedBackground extends React.Component {
   }
 
   render() {
-    const { currentWindowHeight, trelativeOffset, currentOffset } = this.state;
+    const { currentWindowHeight, relativeOffset, currentOffset } = this.state;
     let mixedColor = this.colorMix(currentOffset);
 
     return (
@@ -72,9 +72,51 @@ class AnimatedBackground extends React.Component {
             </linearGradient>
           </defs>
           <rect width="100%" height="100%" fill="url(#grad1)"/>
-        </svg>
-      </div>
-      );
+          <g fill="transparent" strokeWidth="3" stroke="white" transform={ `translate(500 ${ (relativeOffset * -300) + 1200 })` }>
+            <circle cx="100" cy="500" r="50"  >
+              <animateMotion path="M 0,0	Q 50,-50 0,-350 T 0,-750 T 0,-1000" dur="13s" repeatCount="indefinite" />
+              <animate attributeName="opacity" from="1" to="0" dur="13s" repeatCount="indefinite"/>
+            </circle>
+
+            <circle cx="500" cy="500" r="250"  >
+              <animateMotion path="M 0,0	Q 50,-50 0,-350 T 0,-750 T 0,-1000" dur="10s" repeatCount="indefinite" />
+              <animate attributeName="opacity" from="1" to="0" dur="10s" repeatCount="indefinite"/>
+            </circle>
+
+            <circle cx="900" cy="500" r="150"  >
+              <animateMotion path="M 0,0	Q 50,-50 0,-350 T 0,-750 T 0,-1000" dur="12s" repeatCount="indefinite" />
+              <animate attributeName="opacity" from="1" to="0" dur="12s" repeatCount="indefinite"/>
+            </circle>
+
+            <circle cx="1300" cy="500" r="125" >
+              <animateMotion path="M 0,0	Q 50,-50 0,-350 T 0,-750 T 0,-1000" dur="11s" repeatCount="indefinite" />
+              <animate attributeName="opacity" from="1" to="0" dur="11s" repeatCount="indefinite"/>
+            </circle>
+            </g>
+          <g fill="transparent" strokeWidth="3" stroke="white" transform={ `translate(145 ${ (relativeOffset * -300) + 1000 })` }>
+            <circle cx="900" cy="500" r="175"  >
+              <animateMotion path="M 0,0	Q 50,-50 0,-350 T 0,-750 T 0,-1000" dur="13s" repeatCount="indefinite" />
+              <animate attributeName="opacity" from="1" to="0" dur="13s" repeatCount="indefinite"/>
+            </circle>
+
+            <circle cx="1300" cy="500" r="200" >
+              <animateMotion path="M 0,0	Q 50,-50 0,-350 T 0,-750 T 0,-1000" dur="10s" repeatCount="indefinite" />
+              <animate attributeName="opacity" from="1" to="0" dur="10s" repeatCount="indefinite"/>
+            </circle>
+
+            <circle cx="100" cy="500" r="75"  >
+              <animateMotion path="M 0,0	Q 50,-50 0,-350 T 0,-750 T 0,-1000" dur="12s" repeatCount="indefinite" />
+              <animate attributeName="opacity" from="1" to="0" dur="12s" repeatCount="indefinite"/>
+            </circle>
+
+            <circle cx="500" cy="500" r="220"  >
+              <animateMotion path="M 0,0	Q 50,-50 0,-350 T 0,-750 T 0,-1000" dur="11s" repeatCount="indefinite" />
+              <animate attributeName="opacity" from="1" to="0" dur="11s" repeatCount="indefinite"/>
+            </circle>
+            </g>
+          </svg>
+        </div>
+        );
   }
 }
 

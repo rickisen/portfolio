@@ -6,3 +6,7 @@
   top: 0px;
   left: 0px;
 }
+
+.animated-background svg * {
+  /* transition: all 0.1s linear; */
+}
