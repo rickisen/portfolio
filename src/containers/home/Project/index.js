@@ -91,7 +91,7 @@ export default class Project extends React.Component {
               </div>
             ))}
           </section>
-          <div className="content">
+          <div className="content" style={{ backgroundColor: p.primaryColor }}>
             <h3>{p.title}</h3>
             <header>
               <p>

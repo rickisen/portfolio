@@ -2,8 +2,10 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Color from 'color';
+import seedrandom from 'seedrandom'
 
-import { addAnimationCallBack } from '../../../helpers/paralaxHelpers';
+import * as paralaxHelpers from '../../../helpers/paralaxHelpers';
+import LogoPaths from '../../../components/LogoPaths';
 import style from './style.css';
 
 class AnimatedBackground extends React.Component {
@@ -15,20 +17,22 @@ class AnimatedBackground extends React.Component {
       timer: null,
       currentOffset: 0,
       relativeOffset: 0,
-      currentWindowHeight: 0,
+      currentWindowHeight: paralaxHelpers.currentWindowHeight,
+      currentWindowWidth: paralaxHelpers.currentWindowWidth,
       currentDocumentHeight: 0,
     }
   }
 
   componentWillMount() {
-    addAnimationCallBack(({currentOffset, relativeOffset, currentWindowHeight, currentDocumentHeight}) => {
+    paralaxHelpers.addAnimationCallBack(({currentOffset, relativeOffset, currentWindowWidth, currentWindowHeight, currentDocumentHeight}) => {
       if (
-        currentOffset != this.state.currentOffset ||
-        relativeOffset != this.state.relativeOffset ||
-        currentWindowHeight != this.state.currentWindowHeight ||
-        currentDocumentHeight != this.state.currentDocumentHeight
+        currentOffset !== this.state.currentOffset ||
+        relativeOffset !== this.state.relativeOffset ||
+        currentWindowHeight !== this.state.currentWindowHeight ||
+        currentWindowWidth !== this.state.currentWindowWidth ||
+        currentDocumentHeight !== this.state.currentDocumentHeight
       ) {
-        this.setState({currentOffset, relativeOffset, currentWindowHeight, currentDocumentHeight});
+        this.setState({currentOffset, relativeOffset, currentWindowHeight, currentWindowWidth, currentDocumentHeight});
       }
     })
   }
@@ -37,7 +41,7 @@ class AnimatedBackground extends React.Component {
     const { currentDocumentHeight } = this.state;
 
     let firstColorPos = {color: 'rgb(0,0,0)', scrollDistance: 0};
-    let nextColorPos  = {color: 'rgb(255,255,10)', scrollDistance: 1000};
+    let nextColorPos  = {color: 'rgb(200,255,10)', scrollDistance: 1000};
     let mixAmmount    = 0.5;
     let closestAbove  = currentDocumentHeight * -1;
     let closestBellow = currentDocumentHeight;
@@ -59,8 +63,21 @@ class AnimatedBackground extends React.Component {
   }
 
   render() {
-    const { currentWindowHeight, relativeOffset, currentOffset } = this.state;
+    const { currentWindowHeight, currentWindowWidth, relativeOffset, currentOffset } = this.state;
     let mixedColor = this.colorMix(currentOffset);
+
+    const pl = [
+      'react',
+      'unity3d',
+      'heroku',
+      'unity3d',
+      'react',
+      'heroku',
+      'unity3d',
+      'heroku',
+      'react',
+      'heroku',
+    ];
 
     return (
       <div className="animated-background">
@@ -70,54 +87,67 @@ class AnimatedBackground extends React.Component {
               <stop offset="0%" style={{stopColor:`rgb(0,0,0)`, stopOpacity:1}} />
               <stop offset="100%" style={{stopColor:mixedColor.rgb(), stopOpacity:1}} />
             </linearGradient>
+            <filter id="softglow">
+              <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
           </defs>
           <rect width="100%" height="100%" fill="url(#grad1)"/>
-          <g fill="transparent" strokeWidth="3" stroke="white" transform={ `translate(500 ${ (relativeOffset * -300) + 1200 })` }>
-            <circle cx="100" cy="500" r="50"  >
-              <animateMotion path="M 0,0	Q 50,-50 0,-350 T 0,-750 T 0,-1000" dur="13s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="13s" repeatCount="indefinite"/>
-            </circle>
-
-            <circle cx="500" cy="500" r="250"  >
-              <animateMotion path="M 0,0	Q 50,-50 0,-350 T 0,-750 T 0,-1000" dur="10s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="10s" repeatCount="indefinite"/>
-            </circle>
-
-            <circle cx="900" cy="500" r="150"  >
-              <animateMotion path="M 0,0	Q 50,-50 0,-350 T 0,-750 T 0,-1000" dur="12s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="12s" repeatCount="indefinite"/>
-            </circle>
-
-            <circle cx="1300" cy="500" r="125" >
-              <animateMotion path="M 0,0	Q 50,-50 0,-350 T 0,-750 T 0,-1000" dur="11s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="11s" repeatCount="indefinite"/>
-            </circle>
-            </g>
-          <g fill="transparent" strokeWidth="3" stroke="white" transform={ `translate(145 ${ (relativeOffset * -300) + 1000 })` }>
-            <circle cx="900" cy="500" r="175"  >
-              <animateMotion path="M 0,0	Q 50,-50 0,-350 T 0,-750 T 0,-1000" dur="13s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="13s" repeatCount="indefinite"/>
-            </circle>
-
-            <circle cx="1300" cy="500" r="200" >
-              <animateMotion path="M 0,0	Q 50,-50 0,-350 T 0,-750 T 0,-1000" dur="10s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="10s" repeatCount="indefinite"/>
-            </circle>
-
-            <circle cx="100" cy="500" r="75"  >
-              <animateMotion path="M 0,0	Q 50,-50 0,-350 T 0,-750 T 0,-1000" dur="12s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="12s" repeatCount="indefinite"/>
-            </circle>
-
-            <circle cx="500" cy="500" r="220"  >
-              <animateMotion path="M 0,0	Q 50,-50 0,-350 T 0,-750 T 0,-1000" dur="11s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="1" to="0" dur="11s" repeatCount="indefinite"/>
-            </circle>
-            </g>
-          </svg>
-        </div>
-        );
+          <IconLayer
+            seed="first"
+            labels={pl}
+            currentWindowWidth={currentWindowWidth}
+            verticalOffset={(relativeOffset * -300) + currentWindowHeight + 200}
+            scale={1}
+          />
+          <IconLayer
+            seed="second"
+            labels={pl}
+            currentWindowWidth={currentWindowWidth}
+            verticalOffset={(relativeOffset * -150) + currentWindowHeight + 200}
+            scale={0.75}
+          />
+          <IconLayer
+            seed="third"
+            labels={pl}
+            currentWindowWidth={currentWindowWidth}
+            verticalOffset={(relativeOffset * -100) + currentWindowHeight + 200}
+            scale={0.5}
+          />
+        </svg>
+      </div>
+      );
   }
+}
+
+const IconLayer = ({seed, labels, currentWindowWidth, verticalOffset, scale, filter = ''}) => {
+  return (
+    <g fill="transparent" strokeWidth="3" stroke="white" transform={`translate(0 ${verticalOffset})`}>
+      {labels.map((l, i) => {
+        const locationRng = seedrandom(i + 'location' + seed);
+        const timeRng = seedrandom(i + 'timing' + seed);
+        const locationOffset = locationRng() * currentWindowWidth;
+        const timingOffset = ((timeRng() * 30) + 10) / scale;
+        return (
+          <g key={i} fill={`rgba(255,255,255,${scale})`} strokeWidth="0" filter={filter}>
+            <LogoPaths pathLabel={l} transform={`translate(${locationOffset}) scale(${scale})`}/>
+            <animateMotion path="M 0,0	Q 50,-50 0,-350 T 0,-750 T 0,-1000 T 0,-1250 T 0,-1750" dur={`${(timingOffset)}s`} repeatCount="indefinite" />
+            <animate attributeName="opacity" from="1" to="0" dur={`${timingOffset}s`} repeatCount="indefinite"/>
+          </g>
+        );
+      })}
+    </g>
+  );
 }
 
 const mapStateToProps = ({colors, siteSettings}) => ({

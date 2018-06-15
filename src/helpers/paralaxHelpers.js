@@ -1,9 +1,11 @@
 let intervalId = null;
 let callbacks = [];
-let currentWindowHeight = 1000; // in case of server-side rendering
+export let currentWindowHeight = 1000; // in case of server-side rendering
+export let currentWindowWidth = 1000; // in case of server-side rendering
 
 if (window) {
   currentWindowHeight = window.innerHeight;
+  currentWindowWidth = window.innerWidth;
 }
 
 function getCurrentDocumentHeight() {
@@ -23,6 +25,7 @@ function getCurrentDocumentHeight() {
 
 function handleWindowResize(e) {
   currentWindowHeight = e.target.innerHeight;
+  currentWindowWidth = e.target.innerWidth;
 }
 
 export function startTrackingScroll(frameRate = 60) {
@@ -45,6 +48,7 @@ export function startTrackingScroll(frameRate = 60) {
               currentOffset,
               relativeOffset,
               currentWindowHeight,
+              currentWindowWidth,
               currentDocumentHeight
             });
           }, 0);
