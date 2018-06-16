@@ -46,7 +46,7 @@ class AnimatedBackground extends React.Component {
     let closestAbove  = currentDocumentHeight * -1;
     let closestBellow = currentDocumentHeight;
 
-    this.props.colors.colors.forEach((colorPos) => {
+    this.props.themes.colors.forEach((colorPos) => {
       let proximity = position - colorPos.scrollDistance;
       if (proximity < 0 && proximity > closestAbove) {
         closestAbove = proximity;
@@ -157,8 +157,8 @@ const IconLayer = ({seed, labels, currentWindowWidth, currentWindowHeight, verti
   );
 }
 
-const mapStateToProps = ({colors, siteSettings}) => ({
-  colors,
+const mapStateToProps = ({themes, siteSettings}) => ({
+  themes,
   siteSettings
 });
 

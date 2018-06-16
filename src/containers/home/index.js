@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { addColor } from '../../modules/colors';
+import { addColor } from '../../modules/themes';
 import { loadFormSettings } from '../../modules/contactForm';
 import { loadProjects, loadProjectSection } from '../../modules/projects';
 import { loadSiteSettings } from '../../modules/siteSettings';
