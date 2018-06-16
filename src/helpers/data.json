@@ -83,7 +83,63 @@
       "agency": "BBH",
       "endClient": "TUI",
       "role": ["Game dev"],
-      "primaryColor": "rgb(100,140,220)",
+      "primaryColor": "rgb(100,150,240)",
+      "media": [
+        "https://lh3.googleusercontent.com/TmSU1_njdQujim58v8zOetLBZks47Ziocz0AdEN-TfKerRZmCaVSKQVc9rtiPMqFc_o=w1916-h895-rw",
+        "https://lh3.googleusercontent.com/VkQ19bweWjjXAS9aYLmEMqZX5VfRfOLrukcKoab0jGIN5UsjeJWckurn2Z_PiIoY7t8=w1916-h895-rw",
+        "https://lh3.googleusercontent.com/riAijcyLN6tnQ5bLp3fu9PBwOWrj9JR4oskdu3dB1XGeoNwHbeOilLRO9B-TLz98juM=w1916-h895-rw"
+      ],
+      "title": "A smartphone game for 3-5 year olds",
+      "description":
+        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod  tempor invidunt usto duo dolores et ea rebum. Stet clita kasd gubergren,  no sea",
+      "technologies": [
+        {
+          "name": "C#",
+          "icon": "/public/icons/cSharp.svg"
+        },
+        {
+          "name": "Unity 3D",
+          "icon": "/public/icons/unity.svg"
+        },
+        {
+          "name": "Android",
+          "icon": "/public/icons/android.svg"
+        }
+      ]
+    },
+    {
+      "agency": "BBH",
+      "endClient": "TUI",
+      "role": ["Game dev"],
+      "primaryColor": "rgb(120,40,120)",
+      "media": [
+        "https://lh3.googleusercontent.com/TmSU1_njdQujim58v8zOetLBZks47Ziocz0AdEN-TfKerRZmCaVSKQVc9rtiPMqFc_o=w1916-h895-rw",
+        "https://lh3.googleusercontent.com/VkQ19bweWjjXAS9aYLmEMqZX5VfRfOLrukcKoab0jGIN5UsjeJWckurn2Z_PiIoY7t8=w1916-h895-rw",
+        "https://lh3.googleusercontent.com/riAijcyLN6tnQ5bLp3fu9PBwOWrj9JR4oskdu3dB1XGeoNwHbeOilLRO9B-TLz98juM=w1916-h895-rw"
+      ],
+      "title": "A smartphone game for 3-5 year olds",
+      "description":
+        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod  tempor invidunt usto duo dolores et ea rebum. Stet clita kasd gubergren,  no sea",
+      "technologies": [
+        {
+          "name": "C#",
+          "icon": "/public/icons/cSharp.svg"
+        },
+        {
+          "name": "Unity 3D",
+          "icon": "/public/icons/unity.svg"
+        },
+        {
+          "name": "Android",
+          "icon": "/public/icons/android.svg"
+        }
+      ]
+    },
+    {
+      "agency": "BBH",
+      "endClient": "TUI",
+      "role": ["Game dev"],
+      "primaryColor": "rgb(230,40,20)",
       "media": [
         "https://lh3.googleusercontent.com/TmSU1_njdQujim58v8zOetLBZks47Ziocz0AdEN-TfKerRZmCaVSKQVc9rtiPMqFc_o=w1916-h895-rw",
         "https://lh3.googleusercontent.com/VkQ19bweWjjXAS9aYLmEMqZX5VfRfOLrukcKoab0jGIN5UsjeJWckurn2Z_PiIoY7t8=w1916-h895-rw",

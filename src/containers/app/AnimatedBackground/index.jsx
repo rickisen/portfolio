@@ -107,20 +107,23 @@ class AnimatedBackground extends React.Component {
             seed="first"
             labels={pl}
             currentWindowWidth={currentWindowWidth}
-            verticalOffset={(relativeOffset * -300) + currentWindowHeight + 200}
+            currentWindowHeight={currentWindowHeight}
+            verticalOffset={(relativeOffset * -500) + currentWindowHeight + 200}
             scale={1}
           />
           <IconLayer
             seed="second"
             labels={pl}
             currentWindowWidth={currentWindowWidth}
-            verticalOffset={(relativeOffset * -150) + currentWindowHeight + 200}
+            currentWindowHeight={currentWindowHeight}
+            verticalOffset={(relativeOffset * -250) + currentWindowHeight + 200}
             scale={0.75}
           />
           <IconLayer
             seed="third"
             labels={pl}
             currentWindowWidth={currentWindowWidth}
+            currentWindowHeight={currentWindowHeight}
             verticalOffset={(relativeOffset * -100) + currentWindowHeight + 200}
             scale={0.5}
           />
@@ -130,19 +133,23 @@ class AnimatedBackground extends React.Component {
   }
 }
 
-const IconLayer = ({seed, labels, currentWindowWidth, verticalOffset, scale, filter = ''}) => {
+const IconLayer = ({seed, labels, currentWindowWidth, currentWindowHeight, verticalOffset, scale, filter = ''}) => {
   return (
     <g fill="transparent" strokeWidth="3" stroke="white" transform={`translate(0 ${verticalOffset})`}>
       {labels.map((l, i) => {
-        const locationRng = seedrandom(i + 'location' + seed);
+        const vertical = seedrandom(i + 'vertical' + seed);
+        const horizontal = seedrandom(i + 'horizontal' + seed);
         const timeRng = seedrandom(i + 'timing' + seed);
-        const locationOffset = locationRng() * currentWindowWidth;
-        const timingOffset = ((timeRng() * 30) + 10) / scale;
+
+        const verticalOffset = Math.round(vertical() * currentWindowHeight) * -1;
+        const horizontalOffset = Math.round(horizontal() * currentWindowWidth);
+        const timingOffset = ((timeRng() * 5) + 4);
+
         return (
-          <g key={i} fill={`rgba(255,255,255,${scale})`} strokeWidth="0" filter={filter}>
-            <LogoPaths pathLabel={l} transform={`translate(${locationOffset}) scale(${scale})`}/>
-            <animateMotion path="M 0,0	Q 50,-50 0,-350 T 0,-750 T 0,-1000 T 0,-1250 T 0,-1750" dur={`${(timingOffset)}s`} repeatCount="indefinite" />
-            <animate attributeName="opacity" from="1" to="0" dur={`${timingOffset}s`} repeatCount="indefinite"/>
+          <g key={i} fill={`rgba(255,255,255,${scale})`} strokeWidth="0" transform={`translate(${horizontalOffset} ${verticalOffset}) scale(${scale})`} filter={filter}>
+            <LogoPaths pathLabel={l} />
+            {/* <animateMotion path="M 0,0	Q 50,-50 0,-350 T 0,-750 T 0,-1000 T 0,-1250 T 0,-1750" dur={`${(timingOffset)}s`} repeatCount="indefinite" /> */}
+            <animate attributeName="opacity" values="0.99;0.20;0.99" dur={`${timingOffset}s`} repeatCount="indefinite"/>
           </g>
         );
       })}

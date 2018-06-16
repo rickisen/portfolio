@@ -43,15 +43,13 @@ export function startTrackingScroll(frameRate = 60) {
         try {
           //looks hacky, but is the most compatible way of pushing functions of
           //the stack into the event loop.
-          setTimeout(() => {
-            callbacks[i]({
-              currentOffset,
-              relativeOffset,
-              currentWindowHeight,
-              currentWindowWidth,
-              currentDocumentHeight
-            });
-          }, 0);
+          callbacks[i]({
+            currentOffset,
+            relativeOffset,
+            currentWindowHeight,
+            currentWindowWidth,
+            currentDocumentHeight
+          });
         } catch (e) {
           console.log(
             'Error occured when trying to run animation callbacks',
