@@ -32,9 +32,10 @@ export default class Project extends React.Component {
     if (projectElem) {
       scrollDistance = Math.round(offsetToDocument(projectElem).top);
     }
-    this.props.addColor(this.props.iteration, {
+    this.props.addPlacement(this.props.iteration, {
       scrollDistance,
-      color: this.props.project.primaryColor
+      color: this.props.project.primaryColor,
+      icons: this.props.project.technologies.map(t => t.icon)
     });
   }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { addColor } from '../../modules/themes';
+import { addPlacement, clearIcons } from '../../modules/themes';
 import { loadFormSettings } from '../../modules/contactForm';
 import { loadProjects, loadProjectSection } from '../../modules/projects';
 import { loadSiteSettings } from '../../modules/siteSettings';
@@ -53,7 +53,7 @@ class Home extends React.Component {
                 project={p}
                 iteration={i}
                 projectSection={projects.projectSection}
-                addColor={(k, v) => this.props.addColor(k, v)}
+                addPlacement={(k, v) => this.props.addPlacement(k, v)}
               />
             ))}
           </div>
@@ -76,7 +76,7 @@ const mapDispatchToProps = dispatch =>
       loadProjectSection,
       loadProjects,
       loadSiteSettings,
-      addColor
+      addPlacement
     },
     dispatch
   );

@@ -1,19 +1,19 @@
-export const ADD_COLOR = 'colors/add';
-export const CLEAR_COLORS = 'colors/clear';
+export const ADD_PLACEMENT = 'placements/add';
+export const CLEAR_PLACEMENTS = 'placements/clear';
 
 const initialState = {
-  colors: new Map()
+  placements: new Map()
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case CLEAR_COLORS:
+    case CLEAR_PLACEMENTS:
       return {
         ...state,
-        colors: initialState.colors
+        placements: initialState.placements
       };
-    case ADD_COLOR:
-      state.colors.set(action.key, action.value);
+    case ADD_PLACEMENT:
+      state.placements.set(action.key, action.value);
       return {
         ...state
       };
@@ -22,20 +22,20 @@ export default (state = initialState, action) => {
   }
 };
 
-export const addColor = (key, value) => {
+export const addPlacement = (key, value) => {
   return dispatch => {
     dispatch({
-      type: ADD_COLOR,
+      type: ADD_PLACEMENT,
       key,
       value
     });
   };
 };
 
-export const clearColors = () => {
+export const clearPlacements = () => {
   return dispatch => {
     dispatch({
-      type: CLEAR_COLORS
+      type: CLEAR_PLACEMENTS
     });
   };
 };

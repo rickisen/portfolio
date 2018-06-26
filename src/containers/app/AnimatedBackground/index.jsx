@@ -6,21 +6,20 @@ import seedrandom from 'seedrandom'
 
 import * as paralaxHelpers from '../../../helpers/paralaxHelpers';
 import LogoPaths from '../../../components/LogoPaths';
+import IconLayer from './IconLayer';
 import style from './style.css';
 
 class AnimatedBackground extends React.Component {
-
   constructor(props, context) {
-    super(props, context)
+    super(props, context);
 
     this.state = {
-      timer: null,
       currentOffset: 0,
       relativeOffset: 0,
       currentWindowHeight: paralaxHelpers.currentWindowHeight,
       currentWindowWidth: paralaxHelpers.currentWindowWidth,
       currentDocumentHeight: 0,
-    }
+    };
   }
 
   componentWillMount() {
@@ -34,10 +33,11 @@ class AnimatedBackground extends React.Component {
       ) {
         this.setState({currentOffset, relativeOffset, currentWindowHeight, currentWindowWidth, currentDocumentHeight});
       }
-    })
+    });
   }
 
-  colorMix(position = 0) {
+  // TODO: Add comments, kinda strange function
+  getCurrentTheme(position = 0) {
     const { currentDocumentHeight } = this.state;
 
     let firstColorPos = {color: 'rgb(0,0,0)', scrollDistance: 0};
@@ -45,39 +45,31 @@ class AnimatedBackground extends React.Component {
     let mixAmmount    = 0.5;
     let closestAbove  = currentDocumentHeight * -1;
     let closestBellow = currentDocumentHeight;
+    let theme = {
+      mixedColor: Color('rgb(0,0,0)'),
+      icons: [],
+    };
 
-    this.props.themes.colors.forEach((colorPos) => {
+    this.props.themes.placements.forEach((colorPos) => {
       let proximity = position - colorPos.scrollDistance;
       if (proximity < 0 && proximity > closestAbove) {
         closestAbove = proximity;
         firstColorPos = colorPos;
+        theme.icons = colorPos.icons;
       } else if ( proximity >= 0 && proximity < closestBellow ) {
         closestBellow = proximity;
         nextColorPos = colorPos;
       }
     });
-
     mixAmmount = Math.min((nextColorPos.scrollDistance - position) / (nextColorPos.scrollDistance - firstColorPos.scrollDistance), 1)
+    theme.mixedColor = Color(nextColorPos.color).mix(Color(firstColorPos.color), mixAmmount);
 
-    return Color(nextColorPos.color).mix(Color(firstColorPos.color), mixAmmount);
+    return theme;
   }
 
   render() {
     const { currentWindowHeight, currentWindowWidth, relativeOffset, currentOffset } = this.state;
-    let mixedColor = this.colorMix(currentOffset);
-
-    const pl = [
-      'react',
-      'unity3d',
-      'heroku',
-      'unity3d',
-      'react',
-      'heroku',
-      'unity3d',
-      'heroku',
-      'react',
-      'heroku',
-    ];
+    let { mixedColor, icons } = this.getCurrentTheme(currentOffset);
 
     return (
       <div className="animated-background">
@@ -105,56 +97,35 @@ class AnimatedBackground extends React.Component {
           <rect width="100%" height="100%" fill="url(#grad1)"/>
           <IconLayer
             seed="first"
-            labels={pl}
+            labels={icons}
             currentWindowWidth={currentWindowWidth}
             currentWindowHeight={currentWindowHeight}
             verticalOffset={(relativeOffset * -500) + currentWindowHeight + 200}
             scale={1}
+            count={10}
           />
           <IconLayer
             seed="second"
-            labels={pl}
+            labels={icons}
             currentWindowWidth={currentWindowWidth}
             currentWindowHeight={currentWindowHeight}
             verticalOffset={(relativeOffset * -250) + currentWindowHeight + 200}
             scale={0.75}
+            count={10}
           />
           <IconLayer
             seed="third"
-            labels={pl}
+            labels={icons}
             currentWindowWidth={currentWindowWidth}
             currentWindowHeight={currentWindowHeight}
             verticalOffset={(relativeOffset * -100) + currentWindowHeight + 200}
             scale={0.5}
+            count={10}
           />
         </svg>
       </div>
-      );
+    );
   }
-}
-
-const IconLayer = ({seed, labels, currentWindowWidth, currentWindowHeight, verticalOffset, scale, filter = ''}) => {
-  return (
-    <g fill="transparent" strokeWidth="3" stroke="white" transform={`translate(0 ${verticalOffset})`}>
-      {labels.map((l, i) => {
-        const vertical = seedrandom(i + 'vertical' + seed);
-        const horizontal = seedrandom(i + 'horizontal' + seed);
-        const timeRng = seedrandom(i + 'timing' + seed);
-
-        const verticalOffset = Math.round(vertical() * currentWindowHeight) * -1;
-        const horizontalOffset = Math.round(horizontal() * currentWindowWidth);
-        const timingOffset = ((timeRng() * 5) + 4);
-
-        return (
-          <g key={i} fill={`rgba(255,255,255,${scale})`} strokeWidth="0" transform={`translate(${horizontalOffset} ${verticalOffset}) scale(${scale})`} filter={filter}>
-            <LogoPaths pathLabel={l} />
-            {/* <animateMotion path="M 0,0	Q 50,-50 0,-350 T 0,-750 T 0,-1000 T 0,-1250 T 0,-1750" dur={`${(timingOffset)}s`} repeatCount="indefinite" /> */}
-            <animate attributeName="opacity" values="0.99;0.20;0.99" dur={`${timingOffset}s`} repeatCount="indefinite"/>
-          </g>
-        );
-      })}
-    </g>
-  );
 }
 
 const mapStateToProps = ({themes, siteSettings}) => ({

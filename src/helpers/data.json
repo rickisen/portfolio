@@ -43,39 +43,15 @@
       "technologies": [
         {
           "name": "go-lang",
-          "icon": "/public/icons/goLang.svg"
+          "icon": "goLang"
         },
         {
           "name": "react",
-          "icon": "/public/icons/react.svg"
+          "icon": "react"
         },
         {
           "name": "heroku",
-          "icon": "/public/icons/heroku.svg"
-        }
-      ]
-    },
-    {
-      "agency": "BBH",
-      "endClient": "ZAG",
-      "role": ["Front end", "Back end"],
-      "primaryColor": "rgb(255,105,180)",
-      "media": ["/wearezag-1.png", "/wearezag-2.png", "/wearezag-3.png"],
-      "title": "A Homepage for a design agency in London",
-      "description":
-        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod  tempor invidunt usto duo dolores et ea rebum. Stet clita kasd gubergren,  no sea",
-      "technologies": [
-        {
-          "name": "react",
-          "icon": "/public/icons/react.svg"
-        },
-        {
-          "name": "node",
-          "icon": "/public/icons/node.svg"
-        },
-        {
-          "name": "heroku",
-          "icon": "/public/icons/heroku.svg"
+          "icon": "heroku"
         }
       ]
     },
@@ -95,15 +71,39 @@
       "technologies": [
         {
           "name": "C#",
-          "icon": "/public/icons/cSharp.svg"
+          "icon": "cSharp"
         },
         {
           "name": "Unity 3D",
-          "icon": "/public/icons/unity.svg"
+          "icon": "unity3d"
         },
         {
           "name": "Android",
-          "icon": "/public/icons/android.svg"
+          "icon": "android"
+        }
+      ]
+    },
+    {
+      "agency": "BBH",
+      "endClient": "ZAG",
+      "role": ["Front end", "Back end"],
+      "primaryColor": "rgb(255,105,180)",
+      "media": ["/wearezag-1.png", "/wearezag-2.png", "/wearezag-3.png"],
+      "title": "A Homepage for a design agency in London",
+      "description":
+        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod  tempor invidunt usto duo dolores et ea rebum. Stet clita kasd gubergren,  no sea",
+      "technologies": [
+        {
+          "name": "react",
+          "icon": "react"
+        },
+        {
+          "name": "node",
+          "icon": "node"
+        },
+        {
+          "name": "heroku",
+          "icon": "heroku"
         }
       ]
     },
@@ -123,15 +123,15 @@
       "technologies": [
         {
           "name": "C#",
-          "icon": "/public/icons/cSharp.svg"
+          "icon": "cSharp"
         },
         {
           "name": "Unity 3D",
-          "icon": "/public/icons/unity.svg"
+          "icon": "unity3d"
         },
         {
           "name": "Android",
-          "icon": "/public/icons/android.svg"
+          "icon": "android"
         }
       ]
     },
@@ -151,15 +151,15 @@
       "technologies": [
         {
           "name": "C#",
-          "icon": "/public/icons/cSharp.svg"
+          "icon": "cSharp"
         },
         {
           "name": "Unity 3D",
-          "icon": "/public/icons/unity.svg"
+          "icon": "unity3d"
         },
         {
           "name": "Android",
-          "icon": "/public/icons/android.svg"
+          "icon": "android"
         }
       ]
     }
