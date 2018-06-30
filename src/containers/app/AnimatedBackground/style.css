@@ -11,7 +11,10 @@
   /* transition: all 0.1s linear; */
   position: absolute;
 }
-
 .animated-background .grad-bg * {
   transition: all 0.05s linear;
+}
+
+.icon-layer svg {
+  transform-perspective: 60rem;
 }

@@ -97,37 +97,31 @@ class AnimatedBackground extends React.Component {
           <rect width="100%" height="100%" fill="url(#grad1)"/>
         </svg>
         <IconLayer
-          height="100%"
-          width="100%"
           seed="first"
           labels={icons}
           currentWindowWidth={currentWindowWidth}
           currentWindowHeight={currentWindowHeight}
           verticalOffset={(relativeOffset * -500) + currentWindowHeight + 200}
           scale={1}
-          count={10}
+          quantity={10}
         />
         <IconLayer
-          height="100%"
-          width="100%"
           seed="second"
           labels={icons}
           currentWindowWidth={currentWindowWidth}
           currentWindowHeight={currentWindowHeight}
           verticalOffset={(relativeOffset * -250) + currentWindowHeight + 200}
           scale={0.75}
-          count={10}
+          quantity={10}
         />
         <IconLayer
-          height="100%"
-          width="100%"
           seed="third"
           labels={icons}
           currentWindowWidth={currentWindowWidth}
           currentWindowHeight={currentWindowHeight}
           verticalOffset={(relativeOffset * -100) + currentWindowHeight + 200}
           scale={0.5}
-          count={10}
+          quantity={10}
         />
       </div>
     );

@@ -1,18 +1,46 @@
 import React from 'react';
-import seedrandom from 'seedrandom'
+import PropTypes from 'prop-types';
 
 import LogoPaths from '../../../components/LogoPaths';
 
 export default class IconLayer extends React.Component {
-  static defaultProps = {
+  static propTypes = {
+    seed: PropTypes.string,
+    labels: PropTypes.array,
+    currentWindowWidth: PropTypes.number,
+    currentWindowHeight: PropTypes.number,
+    verticalOffset: PropTypes.number,
+    scale: PropTypes.number,
+    quantity: PropTypes.number,
+    filter: PropTypes.string,
+  }
 
+  static defaultProps = {
+    seed: 'seed',
+    labels: [],
+    currentWindowWidth: 1200,
+    currentWindowHeight: 900,
+    verticalOffset: 0,
+    scale: 1,
+    quantity: 10,
+    filter: '',
   }
 
   render () {
-    const {height, width, seed, labels, currentWindowWidth, currentWindowHeight, verticalOffset, scale, count, filter = ''} = this.props;
+    const {
+      seed,
+      labels,
+      currentWindowWidth,
+      currentWindowHeight,
+      verticalOffset,
+      scale,
+      quantity,
+      filter = '',
+    } = this.props;
+
     let arr = [];
     let k = 0;
-    for (let j = 0 ; j < count; j++) {
+    for (let j = 0 ; j < quantity; j++) {
       if (k < labels.length) {
         arr.push(labels[k]);
       } else {
@@ -23,26 +51,26 @@ export default class IconLayer extends React.Component {
     }
 
     return (
-      <div style={{transform: `translate(0, ${verticalOffset}px)`}}>
-        {arr.map((l, i) => {
-          const vertical = seedrandom(i + 'vertical' + seed);
-          const horizontal = seedrandom(i + 'horizontal' + seed);
-          const timeRng = seedrandom(i + 'timing' + seed);
-
-          const verticalOffset = Math.round(vertical() * currentWindowHeight) * -1;
-          const horizontalOffset = Math.round(horizontal() * currentWindowWidth);
-          const timingOffset = ((timeRng() * 5) + 4);
-
-          return (
-            <svg key={'' + horizontalOffset + verticalOffset} height="100px" width="100px" style={{transform: `translate(${horizontalOffset}px, ${verticalOffset}px) scale(${scale})`}}>
-              <g strokeWidth="0" filter={filter}>
-                <LogoPaths pathLabel={l} i={i}/>
-                {/* <animateMotion path="M 0,0	Q 50,-50 0,-350 T 0,-750 T 0,-1000 T 0,-1250 T 0,-1750" dur={`${(timingOffset)}s`} repeatCount="indefinite" /> */}
-                <animate attributeName="opacity" values="0.99;0.20;0.99" dur={`${timingOffset}s`} repeatCount="indefinite"/>
-              </g>
-            </svg>
-          );
-        })}
+      <div
+        className="icon-layer"
+        style={{
+          height: '3rem',
+          width:'3rem',
+          transform: `translate(0, ${verticalOffset}px)`,
+        }}
+      >
+        {arr.map((l, i) => (
+          <LogoPaths
+            seed={seed}
+            scale={scale}
+            filter={filter}
+            i={i}
+            currentWindowWidth={currentWindowWidth}
+            currentWindowHeight={currentWindowHeight}
+            pathLabel={l}
+            animationDuration={(0.2 + Math.max(0.1, i/10)) / 2}
+          />
+        ))}
       </div>
     );
   }

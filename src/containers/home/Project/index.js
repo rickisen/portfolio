@@ -122,7 +122,7 @@ export default class Project extends React.Component {
               />
             ))}
             <Arrow
-              key="arrow"
+              key="arrow-back"
               direction="left"
               onClick={() => {
                 this.decrementSlide();
@@ -132,7 +132,7 @@ export default class Project extends React.Component {
               className="arrow"
             />
             <Arrow
-              key="arrow"
+              key="arrow-next"
               direction="right"
               onClick={() => {
                 this.incrementSlide();
