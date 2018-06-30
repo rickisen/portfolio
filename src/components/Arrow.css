@@ -1,0 +1,20 @@
+.arrow {
+  fill: transparent;
+  stroke: white;
+  strokewidth: 2;
+  transition: all 400ms ease-in-out;
+}
+.arrow.left {
+  transform: rotate(180deg);
+}
+.arrow.up {
+  transform: rotate(90deg);
+}
+.arrow.down {
+  transform: rotate(-90deg);
+}
+
+.arrow:hover {
+  fill: white;
+  stroke: transparent;
+}

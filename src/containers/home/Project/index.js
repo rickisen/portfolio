@@ -4,6 +4,7 @@ import {
   offsetBetween,
   offsetToDocument
 } from '../../../helpers/paralaxHelpers';
+import Arrow from '../../../components/Arrow';
 import style from './style.css';
 
 export default class Project extends React.Component {
@@ -13,8 +14,10 @@ export default class Project extends React.Component {
     this.prevScrollDistance = 0;
 
     this.state = {
+      locked: false,
       intervalId: null,
-      activeSlide: 0
+      activeSlide: 0,
+      showInfo: false
     };
   }
 
@@ -47,52 +50,102 @@ export default class Project extends React.Component {
 
   stopSlider() {
     clearInterval(this.state.intervalId);
+    this.state.intervalId = null;
   }
 
-  incrementSlide() {
-    let { activeSlide } = this.state;
-    this.setState({
-      activeSlide:
-        activeSlide < this.props.project.media.length - 1 ? ++activeSlide : 0
-    });
+  decrementSlide(qued = false) {
+    let { activeSlide, locked } = this.state;
+    if (!locked) {
+      const mediaLength = this.props.project.media.length - 1;
+      this.setState(
+        {
+          locked: true,
+          activeSlide: activeSlide < mediaLength ? ++activeSlide : 0
+        },
+        () => {
+          setTimeout(() => this.setState({ locked: false }), 800);
+        }
+      );
+    } else if (!qued) {
+      setTimeout(() => this.decrementSlide(true), 800);
+    }
+  }
+
+  incrementSlide(qued = false) {
+    let { activeSlide, locked } = this.state;
+    if (!locked) {
+      const mediaLength = this.props.project.media.length - 1;
+      this.setState(
+        {
+          locked: true,
+          activeSlide: activeSlide <= 0 ? mediaLength : --activeSlide
+        },
+        () => {
+          setTimeout(() => this.setState({ locked: false }), 800);
+        }
+      );
+    } else if (!qued) {
+      setTimeout(() => this.incrementSlide(true), 800);
+    }
+  }
+
+  toggleInfo() {
+    this.setState({ showInfo: !this.state.showInfo });
   }
 
   render() {
-    const { activeSlide } = this.state;
+    const { activeSlide, showInfo } = this.state;
     const { projectSection, project } = this.props;
     const { endClientTitle, roleTitle, technologiesTitle } = projectSection;
     const p = project;
 
     return (
-      <article
-        ref="project-ref"
-        key={p.endClient}
-        className="project"
-        onClick={() => this.incrementSlide()}
-        onMouseEnter={() => this.stopSlider()}
-        onMouseLeave={() => this.startSlider()}>
+      <article ref="project-ref" key={p.endClient} className="project">
         <header>
           <span>{p.agency}</span>:<b>{p.endClient}</b>
         </header>
-        <section className="description">
+        <section className={`description ${showInfo ? 'show' : 'hide'}`}>
           <section className="slider">
             {p.media.map((m, i, arr) => (
               <div
-                className={
+                key={i}
+                className={`background-image ${
                   i === activeSlide
-                    ? 'background-image current'
+                    ? 'current'
                     : i == activeSlide + 1 ||
                       (activeSlide === arr.length - 1 && i === 0)
-                      ? 'background-image next'
-                      : 'background-image prev'
-                }
+                      ? 'next'
+                      : 'prev'
+                }`}
                 style={{ backgroundImage: `url(${m})` }}
-                key={i}>
-                {' '}
-              </div>
+                onClick={() => this.toggleInfo()}
+              />
             ))}
+            <Arrow
+              key="arrow"
+              direction="left"
+              onClick={() => {
+                this.decrementSlide();
+                this.stopSlider();
+              }}
+              style={{ position: 'absolute', left: '-8rem', top: '15rem' }}
+              className="arrow"
+            />
+            <Arrow
+              key="arrow"
+              direction="right"
+              onClick={() => {
+                this.incrementSlide();
+                this.stopSlider();
+              }}
+              style={{ position: 'absolute', right: '-8rem', top: '15rem' }}
+              className="arrow"
+            />
           </section>
-          <div className="content" style={{ backgroundColor: p.primaryColor }}>
+          <div
+            className="content"
+            onClick={() => this.toggleInfo()}
+            style={{ backgroundColor: p.primaryColor }}>
             <h3>{p.title}</h3>
             <header>
               <p>

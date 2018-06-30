@@ -17,7 +17,7 @@
   transition: opacity 0.4s linear;
   padding: 1rem 2rem;
 }
-.description:hover > *,
+.description.show > *,
 .description.active > * {
   opacity: 1;
 }
@@ -28,9 +28,9 @@
   height: 50rem;
   width: 75rem;
   position: absolute;
-  top: 0px;
+  ,top: 0px;
   left: 0px;
-  overflow: hidden;
+  /* overflow: hidden; */
   transition-property: opacity transform;
   transition-duration: 0.4s;
   transition-timing-function: ease-in-out;
@@ -57,7 +57,7 @@
   transform: translateX(75rem);
   opacity: 0;
 }
-.description:hover .slider,
+.description.show .slider,
 .description.active > .slider {
   opacity: 0.8;
   transform: translateX(0rem) rotate3d(0, 1, 0, -30deg);
