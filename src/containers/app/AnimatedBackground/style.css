@@ -7,6 +7,11 @@
   left: 0px;
 }
 
-.animated-background svg * {
+.animated-background svg {
   /* transition: all 0.1s linear; */
+  position: absolute;
+}
+
+.animated-background .grad-bg * {
+  transition: all 0.05s linear;
 }

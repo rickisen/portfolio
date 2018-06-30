@@ -73,7 +73,7 @@ class AnimatedBackground extends React.Component {
 
     return (
       <div className="animated-background">
-        <svg height="100%" width="100%">
+        <svg className="grad-bg" height="100%" width="100%">
           <defs>
             <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" style={{stopColor:`rgb(0,0,0)`, stopOpacity:1}} />
@@ -95,34 +95,40 @@ class AnimatedBackground extends React.Component {
             </filter>
           </defs>
           <rect width="100%" height="100%" fill="url(#grad1)"/>
-          <IconLayer
-            seed="first"
-            labels={icons}
-            currentWindowWidth={currentWindowWidth}
-            currentWindowHeight={currentWindowHeight}
-            verticalOffset={(relativeOffset * -500) + currentWindowHeight + 200}
-            scale={1}
-            count={10}
-          />
-          <IconLayer
-            seed="second"
-            labels={icons}
-            currentWindowWidth={currentWindowWidth}
-            currentWindowHeight={currentWindowHeight}
-            verticalOffset={(relativeOffset * -250) + currentWindowHeight + 200}
-            scale={0.75}
-            count={10}
-          />
-          <IconLayer
-            seed="third"
-            labels={icons}
-            currentWindowWidth={currentWindowWidth}
-            currentWindowHeight={currentWindowHeight}
-            verticalOffset={(relativeOffset * -100) + currentWindowHeight + 200}
-            scale={0.5}
-            count={10}
-          />
         </svg>
+        <IconLayer
+          height="100%"
+          width="100%"
+          seed="first"
+          labels={icons}
+          currentWindowWidth={currentWindowWidth}
+          currentWindowHeight={currentWindowHeight}
+          verticalOffset={(relativeOffset * -500) + currentWindowHeight + 200}
+          scale={1}
+          count={10}
+        />
+        <IconLayer
+          height="100%"
+          width="100%"
+          seed="second"
+          labels={icons}
+          currentWindowWidth={currentWindowWidth}
+          currentWindowHeight={currentWindowHeight}
+          verticalOffset={(relativeOffset * -250) + currentWindowHeight + 200}
+          scale={0.75}
+          count={10}
+        />
+        <IconLayer
+          height="100%"
+          width="100%"
+          seed="third"
+          labels={icons}
+          currentWindowWidth={currentWindowWidth}
+          currentWindowHeight={currentWindowHeight}
+          verticalOffset={(relativeOffset * -100) + currentWindowHeight + 200}
+          scale={0.5}
+          count={10}
+        />
       </div>
     );
   }
