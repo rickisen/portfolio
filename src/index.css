@@ -28,3 +28,12 @@ a {
 a:hover {
   color: darkgrey;
 }
+
+.interactive {
+  cursor: pointer;
+  transition: opacity 0.4s linear;
+  opacity: 1;
+}
+.interactive:hover {
+  opacity: 0.5;
+}

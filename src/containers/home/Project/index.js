@@ -5,31 +5,27 @@ import {
   offsetToDocument
 } from '../../../helpers/paralaxHelpers';
 import Arrow from '../../../components/Arrow';
+import Slider from '../../../components/Slider';
 import style from './style.css';
 
 export default class Project extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.prevScrollDistance = 0;
-
     this.state = {
-      locked: false,
-      intervalId: null,
-      activeSlide: 0,
       showInfo: false
     };
   }
 
-  componentWillMount() {
-    setTimeout(() => this.startSlider(), this.props.iteration * 1000 || 0);
-  }
-
-  componentWillUnmount() {
-    this.stopSlider();
+  componentDidMount() {
+    this.registerPlacmentThemes();
   }
 
   componentDidUpdate(prevProps, prevState) {
+    this.registerPlacmentThemes();
+  }
+
+  registerPlacmentThemes() {
     const projectElem = this.refs['project-ref'];
     let scrollDistance = 1000 * this.props.iteration; // just to guard in case of serverside rendering
     if (projectElem) {
@@ -42,59 +38,12 @@ export default class Project extends React.Component {
     });
   }
 
-  startSlider() {
-    this.stopSlider();
-    let intervalId = setInterval(() => this.incrementSlide(), 4500);
-    this.setState({ intervalId });
-  }
-
-  stopSlider() {
-    clearInterval(this.state.intervalId);
-    this.state.intervalId = null;
-  }
-
-  decrementSlide(qued = false) {
-    let { activeSlide, locked } = this.state;
-    if (!locked) {
-      const mediaLength = this.props.project.media.length - 1;
-      this.setState(
-        {
-          locked: true,
-          activeSlide: activeSlide < mediaLength ? ++activeSlide : 0
-        },
-        () => {
-          setTimeout(() => this.setState({ locked: false }), 800);
-        }
-      );
-    } else if (!qued) {
-      setTimeout(() => this.decrementSlide(true), 800);
-    }
-  }
-
-  incrementSlide(qued = false) {
-    let { activeSlide, locked } = this.state;
-    if (!locked) {
-      const mediaLength = this.props.project.media.length - 1;
-      this.setState(
-        {
-          locked: true,
-          activeSlide: activeSlide <= 0 ? mediaLength : --activeSlide
-        },
-        () => {
-          setTimeout(() => this.setState({ locked: false }), 800);
-        }
-      );
-    } else if (!qued) {
-      setTimeout(() => this.incrementSlide(true), 800);
-    }
-  }
-
   toggleInfo() {
     this.setState({ showInfo: !this.state.showInfo });
   }
 
   render() {
-    const { activeSlide, showInfo } = this.state;
+    const { showInfo } = this.state;
     const { projectSection, project } = this.props;
     const { endClientTitle, roleTitle, technologiesTitle } = projectSection;
     const p = project;
@@ -105,43 +54,12 @@ export default class Project extends React.Component {
           <span>{p.agency}</span>:<b>{p.endClient}</b>
         </header>
         <section className={`description ${showInfo ? 'show' : 'hide'}`}>
-          <section className="slider">
-            {p.media.map((m, i, arr) => (
-              <div
-                key={i}
-                className={`background-image ${
-                  i === activeSlide
-                    ? 'current'
-                    : i == activeSlide + 1 ||
-                      (activeSlide === arr.length - 1 && i === 0)
-                      ? 'next'
-                      : 'prev'
-                }`}
-                style={{ backgroundImage: `url(${m})` }}
-                onClick={() => this.toggleInfo()}
-              />
-            ))}
-            <Arrow
-              key="arrow-back"
-              direction="left"
-              onClick={() => {
-                this.decrementSlide();
-                this.stopSlider();
-              }}
-              style={{ position: 'absolute', left: '-8rem', top: '15rem' }}
-              className="arrow"
-            />
-            <Arrow
-              key="arrow-next"
-              direction="right"
-              onClick={() => {
-                this.incrementSlide();
-                this.stopSlider();
-              }}
-              style={{ position: 'absolute', right: '-8rem', top: '15rem' }}
-              className="arrow"
-            />
-          </section>
+          <Slider />
+          <h3
+            className="more-info interactive"
+            onClick={() => this.toggleInfo()}>
+            More Info
+          </h3>
           <div
             className="content"
             onClick={() => this.toggleInfo()}
