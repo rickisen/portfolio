@@ -12,7 +12,7 @@
   position: absolute;
 }
 .animated-background .grad-bg * {
-  transition: all 0.05s linear;
+  /* transition: all 0.05s linear; */
 }
 
 .icon-layer svg {

@@ -1,3 +1,4 @@
+let animationFrameId = null;
 let intervalId = null;
 let callbacks = [];
 export let currentWindowHeight = 1000; // in case of server-side rendering
@@ -28,41 +29,61 @@ function handleWindowResize(e) {
   currentWindowWidth = e.target.innerWidth;
 }
 
-export function startTrackingScroll(frameRate = 60) {
+function CalcFrame(timestamp = false) {
+  const currentOffset = document.documentElement.scrollTop;
+  const currentDocumentHeight = getCurrentDocumentHeight();
+  const relativeOffset =
+    currentOffset / (currentDocumentHeight - currentWindowHeight);
+
+  for (let i = 0, len = callbacks.length; i < len; i++) {
+    try {
+      callbacks[i]({
+        currentOffset,
+        relativeOffset,
+        currentWindowHeight,
+        currentWindowWidth,
+        currentDocumentHeight
+      });
+    } catch (e) {
+      console.log('Error occured when trying to run animation callbacks', e);
+    }
+  }
+
+  if (timestamp) {
+    animationFrameId = requestAnimationFrame(CalcFrame);
+  }
+}
+
+function animationFrameBasedTracking() {
+  animationFrameId = requestAnimationFrame(CalcFrame);
+}
+
+function IntervalBasedTracking(frameRate = 60) {
   const intervalInMs = 1000 / frameRate;
+  intervalId = setInterval(CalcFrame, intervalInMs);
+}
+
+export function startTrackingScroll(frameRate = 60) {
   if (document) {
     window.addEventListener('resize', handleWindowResize);
+  }
 
-    intervalId = setInterval(() => {
-      const currentOffset = document.documentElement.scrollTop;
-      const currentDocumentHeight = getCurrentDocumentHeight();
-      const relativeOffset =
-        currentOffset / (currentDocumentHeight - currentWindowHeight);
-
-      for (let i = 0, len = callbacks.length; i < len; i++) {
-        try {
-          //looks hacky, but is the most compatible way of pushing functions of
-          //the stack into the event loop.
-          callbacks[i]({
-            currentOffset,
-            relativeOffset,
-            currentWindowHeight,
-            currentWindowWidth,
-            currentDocumentHeight
-          });
-        } catch (e) {
-          console.log(
-            'Error occured when trying to run animation callbacks',
-            e
-          );
-        }
-      }
-    }, intervalInMs);
+  if (frameRate == 60) {
+    animationFrameBasedTracking();
+  } else {
+    IntervalBasedTracking(frameRate);
   }
 }
 
 export function stopTrackingScroll() {
-  clearInterval(intervalId);
+  if (intervalId) {
+    clearInterval(intervalId);
+    intervalId = null;
+  }
+  if (animationFrameId) {
+    cancelAnimationFrame(animationFrameId);
+    animationFrameId = null;
+  }
 }
 
 export function addAnimationCallBack(cb) {

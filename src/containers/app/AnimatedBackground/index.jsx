@@ -2,7 +2,6 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Color from 'color';
-import seedrandom from 'seedrandom'
 
 import * as paralaxHelpers from '../../../helpers/paralaxHelpers';
 import LogoPaths from '../../../components/LogoPaths';
@@ -40,7 +39,7 @@ class AnimatedBackground extends React.Component {
   getCurrentTheme(position = 0) {
     const { currentDocumentHeight } = this.state;
 
-    let firstColorPos = {color: 'rgb(0,0,0)', scrollDistance: 0};
+    let firstColorPos = {color: 'rgb(0,0,0)', scrollDistance: 1};
     let nextColorPos  = {color: 'rgb(200,255,10)', scrollDistance: 1000};
     let mixAmmount    = 0.5;
     let closestAbove  = currentDocumentHeight * -1;
