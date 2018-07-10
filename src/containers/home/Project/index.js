@@ -54,7 +54,7 @@ export default class Project extends React.Component {
           <span>{p.agency}</span>:<b>{p.endClient}</b>
         </header>
         <section className={`description ${showInfo ? 'show' : 'hide'}`}>
-          <Slider />
+          <Slider media={p.media} />
           <h3
             className="more-info interactive"
             onClick={() => this.toggleInfo()}>

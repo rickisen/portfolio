@@ -26,6 +26,9 @@
   height: 42rem;
   background-size: contain;
   background-position: center;
+}
+
+.zlider {
   padding: 0 6rem;
 }
 

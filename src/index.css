@@ -31,7 +31,7 @@ a:hover {
 
 .interactive {
   cursor: pointer;
-  transition: opacity 0.4s linear;
+  transition: opacity 0.2s linear;
   opacity: 1;
 }
 .interactive:hover {

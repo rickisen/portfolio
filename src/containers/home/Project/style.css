@@ -1,17 +1,17 @@
 .description {
-  /* flex: 1 1 content; */
   position: relative;
   margin-bottom: 5rem;
   height: 50rem;
-  /* display: flex; */
   flex-direction: column;
   justify-content: center;
   perspective: 60rem;
 }
 .description > .content {
-  z-index: -100;
   background: rgba(20, 20, 20, 0.7);
   position: absolute;
+  top: 0px;
+  left: 0px;
+  margin: 4rem;
   opacity: 0;
   max-width: 40rem;
   transition: opacity 0.4s linear;
@@ -19,16 +19,8 @@
 }
 .description.show > *,
 .description.active > * {
-  z-index: 2000;
   opacity: 1;
 }
-
-/* .description.show .slider, */
-/* .description.active > .slider { */
-/*   opacity: 0.8; */
-/*   transform: translateX(0rem) rotate3d(0, 1, 0, -30deg); */
-/*   transform-origin: right; */
-/* } */
 
 .more-info {
   margin-top: 2rem;
