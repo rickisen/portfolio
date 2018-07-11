@@ -1,0 +1,10 @@
+.cross {
+  fill: white;
+  stroke: transparent;
+  transition: fill 200ms linear;
+  cursor: pointer;
+}
+
+.cross:hover {
+  fill: rgba(255, 255, 255, 0.4);
+}
