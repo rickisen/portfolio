@@ -1,7 +1,7 @@
 .arrow {
   fill: transparent;
   stroke: white;
-  strokewidth: 2;
+  stroke-width: 2;
   transition: all 400ms ease-in-out;
 }
 .arrow.left {

@@ -2,6 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import { addAnimationCallBack } from '../../helpers/paralaxHelpers';
 import { addPlacement, clearIcons } from '../../modules/themes';
 import { loadFormSettings } from '../../modules/contactForm';
 import { loadProjects, loadProjectSection } from '../../modules/projects';
@@ -10,17 +11,36 @@ import Project from './Project';
 import style from './style.css';
 
 class Home extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      currentOffset: 10,
+      currentWindowHeight: 1000
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {}
+
   componentWillMount() {
     this.props.loadSiteSettings();
     this.props.loadFormSettings();
     this.props.loadProjectSection();
     this.props.loadProjects();
-  }
 
-  componentWillReceiveProps(nextProps) {}
+    addAnimationCallBack(({ currentOffset, currentWindowHeight }) => {
+      if (
+        currentOffset !== this.state.currentOffset ||
+        currentWindowHeight !== this.state.currentWindowHeight
+      ) {
+        this.setState({ currentOffset, currentWindowHeight });
+      }
+    });
+  }
 
   render() {
     const { siteSettings, projects, contactForm } = this.props;
+    const { currentOffset, currentWindowHeight } = this.state;
 
     const anyLoading =
       siteSettings.loading ||
@@ -54,6 +74,8 @@ class Home extends React.Component {
                 iteration={i}
                 projectSection={projects.projectSection}
                 addPlacement={(k, v) => this.props.addPlacement(k, v)}
+                currentOffset={currentOffset}
+                currentWindowHeight={currentWindowHeight}
               />
             ))}
           </div>

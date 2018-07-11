@@ -1,6 +1,20 @@
+.project {
+  margin-bottom: 5rem;
+}
+
+.project .slick-dots,
+.project .more-info,
+.project > header {
+  transition: opacity 0.4s linear;
+}
+.project:not(.activated) .slick-dots,
+.project:not(.activated) .more-info,
+.project:not(.activated) > header {
+  opacity: 0;
+}
+
 .description {
   position: relative;
-  margin-bottom: 5rem;
   height: 50rem;
   flex-direction: column;
   justify-content: center;
@@ -10,16 +24,17 @@
   background: rgba(20, 20, 20, 0.7);
   position: absolute;
   top: 0px;
-  left: 0px;
+  left: 4rem;
   margin: 4rem;
-  opacity: 0;
   max-width: 40rem;
-  transition: opacity 0.4s linear;
   padding: 1rem 2rem;
 }
-.description.show > *,
-.description.active > * {
-  opacity: 1;
+
+.content-close {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  transform: scale(0.5) translate(-2rem, 2rem);
 }
 
 .more-info {

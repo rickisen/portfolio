@@ -1,5 +1,7 @@
 .scroll-slider {
   position: relative;
+  z-index: -100;
+  margin: 2rem 0rem;
 }
 .scroll-slider .slick-dots button::before {
   color: white !important;
@@ -13,6 +15,7 @@
   flex-direction: column;
   justify-content: center;
   height: 100%;
+  transition: opacity 0.4s linear;
 }
 .scroll-slider .arrow-wrapper.right {
   right: 0px;
