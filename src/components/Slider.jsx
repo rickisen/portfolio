@@ -48,13 +48,13 @@ export default class Slider extends React.Component {
             dots={true}
             arrows={false}
           >
-            { media && media.map((m, i) => (
-            <div key={"media" + i}>
-              <div
-                className="background-image prev"
-                style={{backgroundImage: `url(${m})`}}
-              ></div>
-            </div>
+            {media && media.map((m, i) => (
+              <div key={"media" + i}>
+                <div
+                  className="background-image"
+                  style={{backgroundImage: `url(${m})`}}
+                ></div>
+              </div>
             ))}
           </Slick.default>
         </div>

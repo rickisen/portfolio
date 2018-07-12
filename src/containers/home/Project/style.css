@@ -15,7 +15,7 @@
 
 .description {
   position: relative;
-  height: 50rem;
+  /* height: 50rem; */
   flex-direction: column;
   justify-content: center;
   perspective: 60rem;

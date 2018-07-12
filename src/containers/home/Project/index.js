@@ -99,7 +99,7 @@ export default class Project extends React.Component {
     const { endClientTitle, roleTitle, technologiesTitle } = projectSection;
     const p = project;
     const inView = this.relativeToViewport();
-    const activated = inView > 0.35 && inView < 0.55;
+    const activated = inView > 0.25 && inView < 0.65;
 
     return (
       <article

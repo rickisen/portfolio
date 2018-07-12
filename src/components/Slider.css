@@ -1,5 +1,6 @@
 @import '~slick-carousel/slick/slick.css';
 @import '~slick-carousel/slick/slick-theme.css';
+
 .scroll-slider {
   position: relative;
   z-index: -100;
@@ -25,20 +26,36 @@
 .scroll-slider .arrow-wrapper.left {
   left: 0px;
 }
+.arrow {
+  display: none;
+}
 
 .scroll-slider .background-image {
-  /* width: 40rem; */
-  height: 35rem;
+  height: 20rem;
   background-size: contain;
   background-position: center;
 }
 
 .zlider {
-  padding: 0 6rem;
+  max-width: calc(100vw - 4rem);
 }
 
-/* @media screen and (min-width: 760px) { */
-/*   * { */
-/*     outline: 1px solid red; */
-/*    } */
-/* } */
+@media screen and (min-width: 760px) {
+  .arrow {
+    display: block;
+  }
+
+  .zlider {
+    padding: 0 6rem;
+    max-width: auto;
+  }
+
+  .scroll-slider .background-image {
+    height: 35rem;
+  }
+
+  .scroll-slider .arrow-wrapper.right,
+  .scroll-slider .arrow-wrapper.left {
+    opacity: 1;
+  }
+}
