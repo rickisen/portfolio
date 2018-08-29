@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Color from 'color';
 
+import guestimateDevice from '../../../helpers/guestimateDevice';
 import * as paralaxHelpers from '../../../helpers/paralaxHelpers';
 import LogoPaths from '../../../components/LogoPaths';
 import IconLayer from './IconLayer';
@@ -75,7 +76,7 @@ class AnimatedBackground extends React.Component {
         <svg className="grad-bg" height="100%" width="100%">
           <defs>
             <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" style={{stopColor:`rgb(0,0,0)`, stopOpacity:1}} />
+              <stop offset="0%" style={{stopColor:mixedColor.darken(0.6).rgb(), stopOpacity:1}} />
               <stop offset="100%" style={{stopColor:mixedColor.rgb(), stopOpacity:1}} />
             </linearGradient>
             <filter id="softglow">
@@ -95,33 +96,37 @@ class AnimatedBackground extends React.Component {
           </defs>
           <rect width="100%" height="100%" fill="url(#grad1)"/>
         </svg>
-        <IconLayer
-          seed="first"
-          labels={icons}
-          currentWindowWidth={currentWindowWidth}
-          currentWindowHeight={currentWindowHeight}
-          verticalOffset={(relativeOffset * -500) + currentWindowHeight + 200}
-          scale={1}
-          quantity={10}
-        />
-        <IconLayer
-          seed="second"
-          labels={icons}
-          currentWindowWidth={currentWindowWidth}
-          currentWindowHeight={currentWindowHeight}
-          verticalOffset={(relativeOffset * -250) + currentWindowHeight + 200}
-          scale={0.75}
-          quantity={10}
-        />
-        <IconLayer
-          seed="third"
-          labels={icons}
-          currentWindowWidth={currentWindowWidth}
-          currentWindowHeight={currentWindowHeight}
-          verticalOffset={(relativeOffset * -100) + currentWindowHeight + 200}
-          scale={0.5}
-          quantity={10}
-        />
+        {!guestimateDevice(currentWindowWidth).isMobile &&
+          <div>
+            <IconLayer
+              seed="first"
+              labels={icons}
+              currentWindowWidth={currentWindowWidth}
+              currentWindowHeight={currentWindowHeight}
+              verticalOffset={(relativeOffset * -500) + currentWindowHeight + 200}
+              scale={1}
+              quantity={10}
+            />
+            <IconLayer
+              seed="second"
+              labels={icons}
+              currentWindowWidth={currentWindowWidth}
+              currentWindowHeight={currentWindowHeight}
+              verticalOffset={(relativeOffset * -250) + currentWindowHeight + 200}
+              scale={0.75}
+              quantity={10}
+            />
+            <IconLayer
+              seed="third"
+              labels={icons}
+              currentWindowWidth={currentWindowWidth}
+              currentWindowHeight={currentWindowHeight}
+              verticalOffset={(relativeOffset * -100) + currentWindowHeight + 200}
+              scale={0.5}
+              quantity={10}
+            />
+          </div>
+        }
       </div>
     );
   }
@@ -136,4 +141,3 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators({}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AnimatedBackground);
-

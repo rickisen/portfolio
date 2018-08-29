@@ -53,11 +53,7 @@ export default class IconLayer extends React.Component {
     return (
       <div
         className="icon-layer"
-        style={{
-          height: '3rem',
-          width:'3rem',
-          transform: `translate(0, ${verticalOffset}px)`,
-        }}
+        style={{ transform: `translate(0, ${verticalOffset}px)` }}
       >
         {arr.map((l, i) => (
           <LogoPaths
